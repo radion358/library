@@ -6,14 +6,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
-    UserDto mapToUserDto(User user) {
+    public UserDto mapToUserDto(User user) {
         return new UserDto(user.getId(),
                 user.getName(),
                 user.getSurname(),
                 user.getUserSignUpDate());
     }
 
-    User mapToUser(UserDto userDto) {
+    public User mapToUser(UserDto userDto) {
         return new User(userDto.getId(),
                 userDto.getName(),
                 userDto.getSurname(),

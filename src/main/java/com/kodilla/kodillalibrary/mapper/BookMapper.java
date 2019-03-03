@@ -19,34 +19,34 @@ public class BookMapper {
         this.bookTitleRepository = bookTitleRepository;
     }
 
-    Book mapToBook(BookDto bookDto) {
+    public Book mapToBook(BookDto bookDto) {
         return new Book(bookDto.getId(),
                 bookTitleRepository.findById(bookDto.getBookTitleDto()
                         .getId()).orElseThrow(BookTitleNotFoundException::new),
                 bookDto.getStatus());
     }
 
-    BookTitle mapToBookTitle(BookTitleDto bookTitleDto) {
+    public BookTitle mapToBookTitle(BookTitleDto bookTitleDto) {
         return new BookTitle(bookTitleDto.getId(),
                 bookTitleDto.getTitle(),
                 bookTitleDto.getAuthor(),
                 bookTitleDto.getPublicationDate());
     }
-    
-    BookDto mapToBookDto(Book book) {
+
+    public BookDto mapToBookDto(Book book) {
         return new BookDto(book.getId(),
                 mapToBookTitleDto(book.getBookTitle()),
                 book.getStatus());
     }
 
-    BookTitleDto mapToBookTitleDto(BookTitle bookTitle) {
+    public BookTitleDto mapToBookTitleDto(BookTitle bookTitle) {
         return new BookTitleDto(bookTitle.getId(),
                 bookTitle.getTitle(),
                 bookTitle.getAuthor(),
                 bookTitle.getPublicationDate());
     }
 
-    List<BookDto> mapToBookDtos(List<Book> books) {
+    public List<BookDto> mapToBookDtoList(List<Book> books) {
         return books.stream().map(book -> mapToBookDto(book))
                 .collect(Collectors.toList());
     }

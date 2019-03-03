@@ -20,14 +20,14 @@ public class LoanMapper {
         this.userRepository = userRepository;
     }
 
-    Loan mapToLoan(LoanDto loanDto) {
+    public Loan mapToLoan(LoanDto loanDto) {
         return new Loan(loanDto.getId(),
                 bookRepository.findById(loanDto.getBookId()).orElseThrow(BookNotFoundExceptin::new),
                 userRepository.findById(loanDto.getUserId()).orElseThrow(UserNotFoundException::new),
                 loanDto.getLoanDate(),
                 loanDto.getReturnDate());
     }
-    LoanDto mapToLoanDto(Loan loan) {
+    public LoanDto mapToLoanDto(Loan loan) {
         return new LoanDto(loan.getId(),
                 loan.getBook().getId(),
                 loan.getUser().getId(),

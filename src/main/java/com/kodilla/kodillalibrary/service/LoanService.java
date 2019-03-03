@@ -21,12 +21,12 @@ public class LoanService {
         this.bookService = bookService;
     }
 
-    Loan addLoan(Book book, User user) {
+    public Loan addLoan(Book book, User user) {
         book.setStatus(Book.LOANED);
         return loanRepository.save(new Loan(book, user, new Date()));
     }
 
-    Loan updateLoan(long id) {
+    public Loan returnLoanedBook(long id) {
         Loan loan = loanRepository.findById(id).orElseThrow(LoanNotFoundException::new);
         Book book = loan.getBook();
         book.setStatus(Book.AVAILABLE);

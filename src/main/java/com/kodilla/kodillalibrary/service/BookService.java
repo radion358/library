@@ -19,21 +19,25 @@ public class BookService {
         this.bookTitleRepository = bookTitleRepository;
     }
 
-    BookTitle addBookTitle(BookTitle bookTitle) {
+    public BookTitle saveBookTitle(BookTitle bookTitle) {
         return bookTitleRepository.save(bookTitle);
     }
 
-    Book addBook(Book book) {
+    public Book saveBook(Book book) {
         return bookRepository.save(book);
     }
 
-    Book updateBookStatus(Book book, long id) {
+    public Book updateBookStatus(Book book, long id) {
         Book bookToUpdate = bookRepository.findById(id).orElseThrow(BookNotFoundExceptin::new);
         bookToUpdate.setStatus(book.getStatus());
         return bookRepository.save(bookToUpdate);
     }
 
-    int howManyBooksAvailable(BookTitle bookTitle) {
+    public int howManyBooksAvailable(BookTitle bookTitle) {
         return bookRepository.findAllByBookTitleAndStatus(bookTitle, Book.AVAILABLE).size();
+    }
+
+    public Book findBookById(long id) {
+        return bookRepository.findById(id).orElseThrow(BookNotFoundExceptin::new);
     }
 }
