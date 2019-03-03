@@ -3,10 +3,13 @@ package com.kodilla.kodillalibrary.service;
 import com.kodilla.kodillalibrary.domain.Book;
 import com.kodilla.kodillalibrary.domain.BookTitle;
 import com.kodilla.kodillalibrary.exception.BookNotFoundExceptin;
+import com.kodilla.kodillalibrary.exception.BookTitleNotFoundException;
 import com.kodilla.kodillalibrary.repository.BookRepository;
 import com.kodilla.kodillalibrary.repository.BookTitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BookService {
@@ -33,11 +36,15 @@ public class BookService {
         return bookRepository.save(bookToUpdate);
     }
 
-    public int howManyBooksAvailable(BookTitle bookTitle) {
-        return bookRepository.findAllByBookTitleAndStatus(bookTitle, Book.AVAILABLE).size();
+    public List<Book> findAvailableBooksByBookTitle(BookTitle bookTitle) {
+        return bookRepository.findAllByBookTitleAndStatus(bookTitle, Book.AVAILABLE);
     }
 
     public Book findBookById(long id) {
         return bookRepository.findById(id).orElseThrow(BookNotFoundExceptin::new);
+    }
+
+    public BookTitle findBookTitleById(long id) {
+        return bookTitleRepository.findById(id).orElseThrow(BookTitleNotFoundException::new);
     }
 }

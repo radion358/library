@@ -2,28 +2,26 @@ package com.kodilla.kodillalibrary.mapper;
 
 import com.kodilla.kodillalibrary.domain.Loan;
 import com.kodilla.kodillalibrary.domain.LoanDto;
-import com.kodilla.kodillalibrary.exception.BookNotFoundExceptin;
-import com.kodilla.kodillalibrary.exception.UserNotFoundException;
-import com.kodilla.kodillalibrary.repository.BookRepository;
-import com.kodilla.kodillalibrary.repository.UserRepository;
+import com.kodilla.kodillalibrary.service.BookService;
+import com.kodilla.kodillalibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LoanMapper {
-    private final BookRepository bookRepository;
-    private final UserRepository userRepository;
+    private final BookService bookService;
+    private final UserService userService;
 
     @Autowired
-    public LoanMapper(BookRepository bookRepository, UserRepository userRepository) {
-        this.bookRepository = bookRepository;
-        this.userRepository = userRepository;
+    public LoanMapper(BookService bookService, UserService userService) {
+        this.bookService = bookService;
+        this.userService = userService;
     }
 
     public Loan mapToLoan(LoanDto loanDto) {
         return new Loan(loanDto.getId(),
-                bookRepository.findById(loanDto.getBookId()).orElseThrow(BookNotFoundExceptin::new),
-                userRepository.findById(loanDto.getUserId()).orElseThrow(UserNotFoundException::new),
+                bookService.findBookById(loanDto.getBookId()),
+                userService.findUserById(loanDto.getUserId()),
                 loanDto.getLoanDate(),
                 loanDto.getReturnDate());
     }

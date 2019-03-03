@@ -4,8 +4,7 @@ import com.kodilla.kodillalibrary.domain.Book;
 import com.kodilla.kodillalibrary.domain.BookDto;
 import com.kodilla.kodillalibrary.domain.BookTitle;
 import com.kodilla.kodillalibrary.domain.BookTitleDto;
-import com.kodilla.kodillalibrary.exception.BookTitleNotFoundException;
-import com.kodilla.kodillalibrary.repository.BookTitleRepository;
+import com.kodilla.kodillalibrary.service.BookService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,16 +12,15 @@ import java.util.stream.Collectors;
 
 @Component
 public class BookMapper {
-    private final BookTitleRepository bookTitleRepository;
+    private final BookService service;
 
-    public BookMapper(BookTitleRepository bookTitleRepository) {
-        this.bookTitleRepository = bookTitleRepository;
+    public BookMapper(BookService service) {
+        this.service = service;
     }
 
     public Book mapToBook(BookDto bookDto) {
         return new Book(bookDto.getId(),
-                bookTitleRepository.findById(bookDto.getBookTitleDto()
-                        .getId()).orElseThrow(BookTitleNotFoundException::new),
+                service.findBookTitleById(bookDto.getBookTitleDto().getId()),
                 bookDto.getStatus());
     }
 
@@ -47,7 +45,7 @@ public class BookMapper {
     }
 
     public List<BookDto> mapToBookDtoList(List<Book> books) {
-        return books.stream().map(book -> mapToBookDto(book))
+        return books.stream().map(this::mapToBookDto)
                 .collect(Collectors.toList());
     }
 }

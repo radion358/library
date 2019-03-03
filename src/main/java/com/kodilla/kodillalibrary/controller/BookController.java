@@ -38,6 +38,6 @@ public class BookController {
 
     @GetMapping
     public int getAvailableBooks(@RequestBody BookTitleDto bookTitleDto) {
-        return service.howManyBooksAvailable(mapper.mapToBookTitle(bookTitleDto));
+        return service.findAvailableBooksByBookTitle(mapper.mapToBookTitle(bookTitleDto)).size();
     }
 }
