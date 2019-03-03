@@ -22,6 +22,7 @@ public class LoanService {
     }
 
     Loan addLoan(Book book, User user) {
+        book.setStatus(Book.LOANED);
         return loanRepository.save(new Loan(book, user, new Date()));
     }
 

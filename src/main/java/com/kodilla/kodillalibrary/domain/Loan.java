@@ -2,10 +2,7 @@ package com.kodilla.kodillalibrary.domain;
 
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -36,7 +33,8 @@ public class Loan {
         this.id = id;
     }
 
-    @Column
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     public Book getBook() {
         return book;
     }
@@ -45,7 +43,8 @@ public class Loan {
         this.book = book;
     }
 
-    @Column
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     public User getUser() {
         return user;
     }

@@ -2,10 +2,7 @@ package com.kodilla.kodillalibrary.domain;
 
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
@@ -32,7 +29,8 @@ public class Book {
         this.id = id;
     }
 
-    @Column
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     public BookTitle getBookTitle() {
         return bookTitle;
     }
