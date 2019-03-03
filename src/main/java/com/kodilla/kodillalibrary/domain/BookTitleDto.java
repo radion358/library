@@ -7,8 +7,5 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookDto {
-    private long id;
-    private BookTitleDto bookTitleDto;
-    private String status;
+public class BookTitleDto {
 }
