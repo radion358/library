@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +17,7 @@ public class BookTitle {
     private long id;
     private String title;
     private String author;
-    private LocalDate publicationDate;
+    private Date publicationDate;
 
     @Id
     @GeneratedValue
@@ -50,11 +50,11 @@ public class BookTitle {
     }
 
     @Column
-    public LocalDate getPublicationDate() {
+    public Date getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(LocalDate publicationDate) {
+    public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
     }
 }
