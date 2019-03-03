@@ -3,6 +3,7 @@ package com.kodilla.kodillalibrary.service;
 import com.kodilla.kodillalibrary.domain.Book;
 import com.kodilla.kodillalibrary.domain.Loan;
 import com.kodilla.kodillalibrary.domain.User;
+import com.kodilla.kodillalibrary.exception.LoanNotFoundException;
 import com.kodilla.kodillalibrary.repository.LoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class LoanService {
     }
 
     Loan updateLoan(long id) {
-        Loan loan = loanRepository.findById(id).orElseThrow(RuntimeException::new);
+        Loan loan = loanRepository.findById(id).orElseThrow(LoanNotFoundException::new);
         Book book = loan.getBook();
         book.setStatus(Book.AVAILABLE);
         bookService.updateBookStatus(book, book.getId());

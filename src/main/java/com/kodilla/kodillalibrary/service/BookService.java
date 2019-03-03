@@ -2,6 +2,7 @@ package com.kodilla.kodillalibrary.service;
 
 import com.kodilla.kodillalibrary.domain.Book;
 import com.kodilla.kodillalibrary.domain.BookTitle;
+import com.kodilla.kodillalibrary.exception.BookNotFoundExceptin;
 import com.kodilla.kodillalibrary.repository.BookRepository;
 import com.kodilla.kodillalibrary.repository.BookTitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class BookService {
     }
 
     Book updateBookStatus(Book book, long id) {
-        Book bookToUpdate = bookRepository.findById(id).orElseThrow(RuntimeException::new);
+        Book bookToUpdate = bookRepository.findById(id).orElseThrow(BookNotFoundExceptin::new);
         bookToUpdate.setStatus(book.getStatus());
         return bookRepository.save(bookToUpdate);
     }
