@@ -1,5 +1,7 @@
 package com.kodilla.kodillalibrary.controller;
 
+import com.kodilla.kodillalibrary.domain.Book;
+import com.kodilla.kodillalibrary.domain.BookDto;
 import com.kodilla.kodillalibrary.domain.LoanDto;
 import com.kodilla.kodillalibrary.mapper.LoanMapper;
 import com.kodilla.kodillalibrary.service.BookService;
@@ -31,7 +33,10 @@ public class LoanController {
     }
 
     @PatchMapping
-    public LoanDto returnBook(@RequestParam long loanId) {
-        return mapper.mapToLoanDto(loanService.returnLoanedBook(loanId));
+    public LoanDto updateBookStatus(@RequestBody BookDto bookDto, @RequestParam long loanId) {
+        if (bookDto.getStatus().equals(Book.AVAILABLE)) {
+            return mapper.mapToLoanDto(loanService.returnLoanedBook(loanId));
+        }
+        return mapper.mapToLoanDto(loanService.findLoanById(loanId));
     }
 }

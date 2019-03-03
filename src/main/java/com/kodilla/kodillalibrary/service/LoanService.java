@@ -34,4 +34,8 @@ public class LoanService {
         loan.setReturnDate(new Date());
         return loanRepository.save(loan);
     }
+
+    public Loan findLoanById(long id) {
+        return loanRepository.findById(id).orElseThrow(LoanNotFoundException::new);
+    }
 }
