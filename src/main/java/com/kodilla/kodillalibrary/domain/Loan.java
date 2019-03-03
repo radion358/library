@@ -18,6 +18,12 @@ public class Loan {
     private Date loanDate;
     private Date returnDate;
 
+    public Loan(Book book, User user, Date loanDate) {
+        this.book = book;
+        this.user = user;
+        this.loanDate = loanDate;
+    }
+
     @Id
     @NotNull
     @GeneratedValue

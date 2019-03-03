@@ -1,0 +1,35 @@
+package com.kodilla.kodillalibrary.service;
+
+import com.kodilla.kodillalibrary.domain.Book;
+import com.kodilla.kodillalibrary.domain.Loan;
+import com.kodilla.kodillalibrary.domain.User;
+import com.kodilla.kodillalibrary.repository.LoanRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+@Service
+public class LoanService {
+    private final LoanRepository loanRepository;
+    private final BookService bookService;
+
+    @Autowired
+    public LoanService(LoanRepository loanRepository, BookService bookService) {
+        this.loanRepository = loanRepository;
+        this.bookService = bookService;
+    }
+
+    Loan addLoan(Book book, User user) {
+        return loanRepository.save(new Loan(book, user, new Date()));
+    }
+
+    Loan updateLoan(long id) {
+        Loan loan = loanRepository.findById(id).orElseThrow(RuntimeException::new);
+        Book book = loan.getBook();
+        book.setStatus(Book.AVAILABLE);
+        bookService.updateBookStatus(book, book.getId());
+        loan.setReturnDate(new Date());
+        return loanRepository.save(loan);
+    }
+}
