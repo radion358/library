@@ -1,10 +1,12 @@
 package com.kodilla.kodillalibrary.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Book {

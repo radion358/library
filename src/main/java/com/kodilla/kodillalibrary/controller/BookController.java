@@ -4,28 +4,32 @@ import com.kodilla.kodillalibrary.domain.BookDto;
 import com.kodilla.kodillalibrary.domain.BookTitleDto;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/books")
 public class BookController {
 
     @PostMapping
-    public void addBook(@RequestBody BookDto bookDto) {
-
+    public BookDto addBook(@RequestBody BookDto bookDto) {
+        return bookDto;
     }
 
     @PostMapping
-    public void addBookTitle(@RequestBody BookTitleDto bookTitleDto) {
-
+    @RequestMapping("/title")
+    public BookTitleDto addBookTitle(@RequestBody BookTitleDto bookTitleDto) {
+        return bookTitleDto;
     }
 
     @PatchMapping
-    @RequestMapping("/{id}")
-    public void changeStatus(@RequestBody BookDto bookDto, @RequestParam Long id) {
-
+    @RequestMapping
+    public BookDto changeStatus(@RequestBody BookDto bookDto, @RequestParam Long id) {
+        return bookDto;
     }
 
     @GetMapping
-    public void getAvailableBooks(@RequestParam String bookName) {
-
+    public List<BookDto> getAvailableBooks(@RequestParam String bookName) {
+        return new ArrayList<>();
     }
 }
