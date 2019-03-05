@@ -5,7 +5,7 @@ import com.kodilla.kodillalibrary.exception.UserNotFoundException;
 import com.kodilla.kodillalibrary.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Service
 public class UserService {
@@ -16,7 +16,7 @@ public class UserService {
     }
 
     public User addUser(User user)  {
-        user.setUserSignUpDate(new Date());
+        user.setUserSignUpDate(LocalDate.now());
         return repository.save(user);
     }
     public User findUserById(long id) {

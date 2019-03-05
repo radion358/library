@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +17,7 @@ public class User {
     private long id;
     private String name;
     private String surname;
-    private Date userSignUpDate;
+    private LocalDate userSignUpDate;
 
     @Id
     @GeneratedValue
@@ -50,11 +50,11 @@ public class User {
     }
 
     @Column
-    public Date getUserSignUpDate() {
+    public LocalDate getUserSignUpDate() {
         return userSignUpDate;
     }
 
-    public void setUserSignUpDate(Date userSignUpDate) {
+    public void setUserSignUpDate(LocalDate userSignUpDate) {
         this.userSignUpDate = userSignUpDate;
     }
 

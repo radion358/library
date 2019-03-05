@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
@@ -13,6 +13,6 @@ public class LoanDto {
     private long id;
     private long bookId;
     private long userId;
-    private Date loanDate;
-    private Date returnDate;
+    private LocalDate loanDate;
+    private LocalDate returnDate;
 }

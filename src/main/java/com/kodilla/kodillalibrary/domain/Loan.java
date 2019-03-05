@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,10 +14,10 @@ public class Loan {
     private long id;
     private Book book;
     private User user;
-    private Date loanDate;
-    private Date returnDate;
+    private LocalDate loanDate;
+    private LocalDate returnDate;
 
-    public Loan(Book book, User user, Date loanDate) {
+    public Loan(Book book, User user, LocalDate loanDate) {
         this.book = book;
         this.user = user;
         this.loanDate = loanDate;
@@ -56,20 +56,20 @@ public class Loan {
     }
 
     @Column
-    public Date getLoanDate() {
+    public LocalDate getLoanDate() {
         return loanDate;
     }
 
-    public void setLoanDate(Date loanDate) {
+    public void setLoanDate(LocalDate loanDate) {
         this.loanDate = loanDate;
     }
 
     @Column
-    public Date getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 }

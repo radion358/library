@@ -8,7 +8,7 @@ import com.kodilla.kodillalibrary.repository.LoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Service
 public class LoanService {
@@ -23,7 +23,7 @@ public class LoanService {
 
     public Loan addLoan(Book book, User user) {
         book.setStatus(Book.LOANED);
-        return loanRepository.save(new Loan(book, user, new Date()));
+        return loanRepository.save(new Loan(book, user, LocalDate.now()));
     }
 
     public Loan returnLoanedBook(long id) {
@@ -31,7 +31,7 @@ public class LoanService {
         Book book = loan.getBook();
         book.setStatus(Book.AVAILABLE);
         bookService.updateBookStatus(book, book.getId());
-        loan.setReturnDate(new Date());
+        loan.setReturnDate(LocalDate.now());
         return loanRepository.save(loan);
     }
 
