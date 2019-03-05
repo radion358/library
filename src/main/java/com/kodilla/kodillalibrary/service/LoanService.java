@@ -15,22 +15,20 @@ public class LoanService {
     private final LoanRepository loanRepository;
     private final BookService bookService;
 
-    @Autowired
     public LoanService(LoanRepository loanRepository, BookService bookService) {
         this.loanRepository = loanRepository;
         this.bookService = bookService;
     }
 
     public Loan addLoan(Book book, User user) {
-        book.setStatus(Book.LOANED);
+        bookService.updateBookStatus(Book.LOANED, book.getId());
         return loanRepository.save(new Loan(book, user, LocalDate.now()));
     }
 
     public Loan returnLoanedBook(long id) {
         Loan loan = loanRepository.findById(id).orElseThrow(LoanNotFoundException::new);
         Book book = loan.getBook();
-        book.setStatus(Book.AVAILABLE);
-        bookService.updateBookStatus(book, book.getId());
+        bookService.updateBookStatus(Book.AVAILABLE, book.getId());
         loan.setReturnDate(LocalDate.now());
         return loanRepository.save(loan);
     }

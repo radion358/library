@@ -7,7 +7,6 @@ import com.kodilla.kodillalibrary.mapper.LoanMapper;
 import com.kodilla.kodillalibrary.service.BookService;
 import com.kodilla.kodillalibrary.service.LoanService;
 import com.kodilla.kodillalibrary.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,8 +16,6 @@ public class LoanController {
     private final LoanMapper mapper;
     private final BookService bookService;
     private final UserService userService;
-
-    @Autowired
     public LoanController(LoanService loanService, LoanMapper mapper, BookService bookService, UserService userService) {
         this.loanService = loanService;
         this.mapper = mapper;

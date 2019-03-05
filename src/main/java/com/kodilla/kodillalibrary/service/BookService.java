@@ -6,7 +6,6 @@ import com.kodilla.kodillalibrary.exception.BookNotFoundExceptin;
 import com.kodilla.kodillalibrary.exception.BookTitleNotFoundException;
 import com.kodilla.kodillalibrary.repository.BookRepository;
 import com.kodilla.kodillalibrary.repository.BookTitleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +15,6 @@ public class BookService {
     private final BookRepository bookRepository;
     private final BookTitleRepository bookTitleRepository;
 
-    @Autowired
     public BookService(BookRepository bookRepository, BookTitleRepository bookTitleRepository) {
         this.bookRepository = bookRepository;
         this.bookTitleRepository = bookTitleRepository;
@@ -30,9 +28,9 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    public Book updateBookStatus(Book book, long id) {
+    public Book updateBookStatus(String status, long id) {
         Book bookToUpdate = bookRepository.findById(id).orElseThrow(BookNotFoundExceptin::new);
-        bookToUpdate.setStatus(book.getStatus());
+        bookToUpdate.setStatus(status);
         return bookRepository.save(bookToUpdate);
     }
 
