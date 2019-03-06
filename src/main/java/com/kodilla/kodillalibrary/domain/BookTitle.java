@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -56,5 +57,18 @@ public class BookTitle {
 
     public void setPublicationDate(LocalDate publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BookTitle bookTitle = (BookTitle) o;
+
+        if (id != bookTitle.id) return false;
+        if (!Objects.equals(title, bookTitle.title)) return false;
+        if (!Objects.equals(author, bookTitle.author)) return false;
+        return Objects.equals(publicationDate, bookTitle.publicationDate);
     }
 }

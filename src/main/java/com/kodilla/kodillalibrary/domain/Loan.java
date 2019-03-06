@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -71,5 +72,19 @@ public class Loan {
 
     public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Loan loan = (Loan) o;
+
+        if (id != loan.id) return false;
+        if (!Objects.equals(book, loan.book)) return false;
+        if (!Objects.equals(user, loan.user)) return false;
+        if (!Objects.equals(loanDate, loan.loanDate)) return false;
+        return Objects.equals(returnDate, loan.returnDate);
     }
 }

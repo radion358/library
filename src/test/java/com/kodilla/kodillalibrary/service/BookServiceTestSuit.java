@@ -114,6 +114,16 @@ public class BookServiceTestSuit {
     public void findBookTitleByIdWithoutValidId() {
         //Given
         BookTitle bookTitle = new BookTitle(1, "test title", "test author", LocalDate.now());
+        when(bookTitleRepository.findById(1L)).thenReturn(Optional.of(bookTitle));
+
+        //When
+        service.findBookTitleById(2);
+    }
+
+    @Test
+    public void findAvailableBooksByBookTitle() {
+        //Given
+        BookTitle bookTitle = new BookTitle(1, "test title", "test author", LocalDate.now());
         Book firstBook = new Book(1, bookTitle, Book.AVAILABLE);
         Book secondBook = new Book(2, bookTitle, Book.AVAILABLE);
         List<Book> books = new ArrayList<>();
@@ -126,11 +136,5 @@ public class BookServiceTestSuit {
 
         //Then
         assertEquals(2, returnedListSize);
-    }
-
-    @Test
-    public void findAvailableBooksByBookTitle() {
-        //Given
-        BookTitle bookTitle = new BookTitle(1, "test title", "test author", LocalDate.now());
     }
 }
